@@ -39,7 +39,7 @@ defmodule PointPokeFront.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:point_poker, path: "../point_poker"},
+      {:point_poker, path: "point_poker"},
       {:phoenix_live_view, "~> 0.9.0"},
       {:floki, ">= 0.0.0", only: :test}
     ]
