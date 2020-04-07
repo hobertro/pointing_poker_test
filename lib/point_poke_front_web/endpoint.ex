@@ -2,7 +2,7 @@ defmodule PointPokeFrontWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :point_poke_front
 
   socket("/socket", PointPokeFrontWeb.UserSocket,
-    websocket: true,
+    websocket: [timeout: 45_000],
     longpoll: false
   )
 
