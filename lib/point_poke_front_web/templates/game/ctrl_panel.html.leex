@@ -1,0 +1,17 @@
+<%= if Game.find_player(@summary.players, @user_tag).state != :observer do %>
+  <div>
+    <button phx-click="player_voted" phx-value-vote="1">1</button>
+    <button phx-click="player_voted" phx-value-vote="2">2</button>
+    <button phx-click="player_voted" phx-value-vote="3">3</button>
+    <button phx-click="player_voted" phx-value-vote="5">5</button>
+    <button phx-click="player_voted" phx-value-vote="8">8</button>
+    <button phx-click="player_voted" phx-value-vote="13">13</button>
+    <button phx-click="player_voted" phx-value-vote="21">21</button>
+    <button phx-click="player_voted" phx-value-vote="?">?</button>
+  </div>
+<% end %>
+<div>
+  <button phx-click="show_votes">Show Votes</button>
+
+  <button phx-click="clear_votes">Clear Votes</button>
+</div>

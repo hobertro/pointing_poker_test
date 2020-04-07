@@ -1,0 +1,29 @@
+<h2>Players</h2>
+
+<ul>
+  <%= for player <- @summary.players do %>
+    <li>
+    <%= if player.id == @user_tag do %>
+      <strong><%= player.name %></strong>
+    <% else %>
+      <%= player.name %>
+    <% end %>
+
+    <%= if player.state == :observer do %>
+      (observer)
+    <% end %>
+    <%= if Player.voted?(player) do %>
+      <%= if player.id == @user_tag || Game.can_show_score?(@summary) do %>
+        <%= Player.get_formatted_vote(player) %>
+      <% else %>
+        (voted)
+      <% end %>
+
+    <% else %>
+    <% end %>
+
+
+
+    </li>
+  <% end %>
+</ul>

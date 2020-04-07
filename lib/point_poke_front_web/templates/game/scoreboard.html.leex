@@ -1,0 +1,3 @@
+<%= if Game.can_show_score?(@summary) do %>
+  Average: <%= Game.score(@summary) %>
+<% end %>
