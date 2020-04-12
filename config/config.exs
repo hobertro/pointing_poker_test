@@ -10,7 +10,7 @@ use Mix.Config
 # Configures the endpoint
 config :point_poke_front, PointPokeFrontWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "s5QHjmGhIf7mMAPMXrp6Cx3i3RBrzMxpLXcmjakjod3zeh7TFMI8nsV6G2eq7+6S",
+  secret_key_base: "BmGqaStL72ff5M+AGt/h5tGsMCqirIJbz4Ux5X71pVpoHLVb+PZ2IUSM1Xi2PP2v",
   render_errors: [view: PointPokeFrontWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: PointPokeFront.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [
