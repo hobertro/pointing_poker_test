@@ -14,7 +14,7 @@ config :point_poke_front, PointPokeFrontWeb.Endpoint,
   url: [scheme: "https", host: "pointing-poke-test.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  check_origin: false
+  check_origin: ["pointing-poke.herokuapp.com"]
 
 # Do not print debug messages in production
 config :logger, level: :info
