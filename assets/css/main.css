@@ -1,0 +1,46 @@
+.main-header{
+  color: black;
+}
+
+.scoreboard {
+  font-size: 2em;
+}
+
+.cards {
+  margin-bottom: 12px;
+}
+
+.card {
+  height: 3.5em;
+  width: 2.5em;
+  background-color: #0069d9;
+  border: 0.1rem solid #0069d9;
+  color: #fff;
+  display: inline-block;
+  margin: 0;
+  border-radius: 4px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  line-height: 3.5em;
+  margin-bottom: 12px;
+  margin-right: 12px;
+}
+
+div.card:hover {
+  background-color: #606c76;
+}
+
+.headers {
+  height: 48px;
+}
+
+.scores_header, .player-score {
+  float: right;
+  list-style: none;
+}
+
+.players_header, .player-name {
+  float: left;
+  list-style: none;
+}

@@ -1,9 +1,11 @@
 <section class="phx-hero">
-    <h1>Welcome!</h1>
+    <h1>Welcome to Pointing Poke!</h1>
+    <p>A scrum planning poker tool for estimating agile projects.</p>
+    <hr>
     <%= form_for @conn, Routes.game_path(@conn, :play, :new), fn f -> %> 
       <div class="form-group">
         <%= text_input f, :id, 
-                          placeholder: "Room Name",
+                          placeholder: "Enter Room Name",
                           autofocus: true,
                           required: true %>
       </div>
