@@ -1,13 +1,13 @@
 <%= if Game.find_player(@summary.players, @user_tag).state != :observer do %>
-  <div>
-    <button phx-click="player_voted" phx-value-vote="1">1</button>
-    <button phx-click="player_voted" phx-value-vote="2">2</button>
-    <button phx-click="player_voted" phx-value-vote="3">3</button>
-    <button phx-click="player_voted" phx-value-vote="5">5</button>
-    <button phx-click="player_voted" phx-value-vote="8">8</button>
-    <button phx-click="player_voted" phx-value-vote="13">13</button>
-    <button phx-click="player_voted" phx-value-vote="21">21</button>
-    <button phx-click="player_voted" phx-value-vote="?">?</button>
+  <div class="cards">
+    <div class="card" phx-click="player_voted" phx-value-vote="1">1</div>
+    <div class="card" phx-click="player_voted" phx-value-vote="2">2</div>
+    <div class="card" phx-click="player_voted" phx-value-vote="3">3</div>
+    <div class="card" phx-click="player_voted" phx-value-vote="5">5</div>
+    <div class="card" phx-click="player_voted" phx-value-vote="8">8</div>
+    <div class="card" phx-click="player_voted" phx-value-vote="13">13</div>
+    <div class="card" phx-click="player_voted" phx-value-vote="21">21</div>
+    <div class="card" phx-click="player_voted" phx-value-vote="?">?</div>
   </div>
 <% end %>
 <div>

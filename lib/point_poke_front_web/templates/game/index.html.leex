@@ -1,7 +1,7 @@
 <%= if @player do %>
   <%= render PointPokeFrontWeb.GameView, "ctrl_panel.html", assigns %>
-  <%= render PointPokeFrontWeb.GameView, "players.html", assigns %>
   <%= render PointPokeFrontWeb.GameView, "scoreboard.html", assigns %>
+  <%= render PointPokeFrontWeb.GameView, "players.html", assigns %>
 <% else %>
   <%= render PointPokeFrontWeb.GameView, "login_to_game.html", assigns %>
 <% end %>

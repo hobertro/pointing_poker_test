@@ -13,7 +13,7 @@
     <header>
       <section class="container">
 
-        <h1>Point Poke ♥️♣️♦️♠️</h1>
+        <h1><a class="main-header" href="/">Point Poke ♥️♣️♦️♠️</a></h1>
       </section>
     </header>
     <main role="main" class="container">
