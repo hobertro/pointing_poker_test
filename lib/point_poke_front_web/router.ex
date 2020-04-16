@@ -18,6 +18,7 @@ defmodule PointPokeFrontWeb.Router do
   scope "/", PointPokeFrontWeb do
     pipe_through(:browser)
     get("/games/:id", GameController, :play)
+    post("games/new", GameController, :new)
     # resources("/games", GameController, only: [:new, :create, :show])
     # match(:post, "/games/join", GameController, :join)
 
