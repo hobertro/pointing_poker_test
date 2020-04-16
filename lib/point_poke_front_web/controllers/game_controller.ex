@@ -16,6 +16,11 @@ defmodule PointPokeFrontWeb.GameController do
     # render(conn, "play.html", user_tag: user_tag, game_id: params["id"])
   end
 
+  def new(conn, %{"id" => game_id} = params) do
+    redirect(conn, to: "/games/#{game_id}")
+    # render(conn, "play.html", user_tag: user_tag, game_id: params["id"])
+  end
+
   # def new(conn, _params) do
   #   render(conn, "new.html")
   # end

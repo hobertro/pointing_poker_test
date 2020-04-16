@@ -1,35 +1,25 @@
 <section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
+    <h1>Welcome!</h1>
+    <%= form_for @conn, Routes.game_path(@conn, :play, :new), fn f -> %> 
+      <div class="form-group">
+        <%= text_input f, :id, 
+                          placeholder: "Room Name",
+                          autofocus: true,
+                          required: true %>
+      </div>
+      <%= submit "Create Pointing Poke Room!", class: "btn btn-primary" %>
+    <% end %>
 </section>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-    </ul>
-  </article>
+<section>
+      built with 
+      <a href="https://elixir-lang.org/" target="_blank">elixir</a> + 
+      <a href="https://www.phoenixframework.org/" target="_blank">phoenix</a> +
+      <a href="https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html" target="_blank">phoenix liveview</a>
+      by 
+      <span>homan chou</span>
+      and
+      <span>robert ho</span>
+      <a href="https://godaddy.com/"   
+      target="_blank">@godaddy</a>
 </section>
