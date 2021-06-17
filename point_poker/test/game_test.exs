@@ -35,11 +35,11 @@ defmodule PointingPokerGameTest do
     assert game.state == {:show_votes, 2.0}
   end
 
-  test "score is zero if no one votes" do
+  test "score is ? if no one votes" do
     game = Game.new()
     game = Game.add_player(game, "a", "bobby")
     game = Game.reveal_votes(game)
-    assert game.state == {:show_votes, 0.0}
+    assert game.state == {:show_votes, "?"}
   end
 
   test "removing a player" do
@@ -63,7 +63,7 @@ defmodule PointingPokerGameTest do
     game = Game.player_voted(game, "a", 3)
     game = Game.add_player(game, "a", "bobby")
     player = Game.find_player(game.players, "a")
-    assert Player.get_vote(player) == 3
+    assert Player.get_numerical_vote(player) == 3
   end
 
   test "if all players that can vote, voted, then reveal votes" do
@@ -74,13 +74,4 @@ defmodule PointingPokerGameTest do
     game = Game.player_voted(game, "b", 1)
     assert game.state == {:show_votes, 2.0}
   end
-
-  # test "adding same player_id with different name changes the name" do
-  #   game = Game.new()
-  #   game = Game.add_player(game, "a", "bobby")
-  #   game = Game.add_player(game, "a", "tommy")
-  #   player = Game.find_player(game.players, "a")
-  #   {_p_id, p_name, _state} = player
-  #   assert p_name == "tommy"
-  # end
 end
