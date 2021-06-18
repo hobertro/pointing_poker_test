@@ -75,6 +75,18 @@ defmodule PointingPoker.Game do
     %Game{game | state: new_state(game.state, players), players: players}
   end
 
+  def reconnect_player(game, player_id) do
+    players = replace(game.players, player_id, fn player -> %Player{player | disconnected_at: nil }  end)
+    %Game{game | state: new_state(game.state, players), players: players}
+  end
+
+  def disconnect_player(game, player_id) do
+    {now_sec, _} = NaiveDateTime.utc_now() |> NaiveDateTime.to_gregorian_seconds()
+    players = replace(game.players, player_id, fn player -> %Player{player | disconnected_at: now_sec }  end)
+    %Game{game | state: new_state(game.state, players), players: players}
+  end
+
+
   def calc_average_score(players) do
     votes =
       Enum.reduce(players, [], fn player, acc ->

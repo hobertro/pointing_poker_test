@@ -54,4 +54,18 @@ defmodule PointingPokerGameServerTest do
     summary = GameServer.summary(game_id)
     assert :voting = summary.state
   end
+
+  test "disconnecting to a game" do
+    game_id = "howdy"
+    GameServer.start_link(game_id)
+    GameServer.join_game(game_id, "a", "bobby")
+    GameServer.player_disconnected(game_id, "a")
+    :timer.sleep(6000)
+    game = GameServer.summary(game_id)
+    assert game.players |> length() == 0
+  end
+
+  # test "reconnecting to a game" do
+
+  # end
 end

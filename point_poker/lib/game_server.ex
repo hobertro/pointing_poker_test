@@ -26,8 +26,16 @@ defmodule PointingPoker.GameServer do
     GenServer.call(via_tuple(game_id), {:join_game, player_id, player_name, observer})
   end
 
+  def player_disconnected(game_id, player_id) do
+    GenServer.call(via_tuple(game_id), {:player_disconnected, player_id})
+  end
+
+  def player_reconnected(game_id, player_id) do
+    GenServer.call(via_tuple(game_id), {:player_reconnected, player_id})
+  end
+
   def leave_game(game_id, player_id) do
-    GenServer.call(via_tuple(game_id), {:leave_game, player_id})
+    GenServer.cast(via_tuple(game_id), {:leave_game, player_id})
   end
 
   def summary(game_id) do
@@ -75,8 +83,9 @@ defmodule PointingPoker.GameServer do
     {:reply, game, game, @timeout}
   end
 
-  def handle_call({:leave_game, player_id}, _from, game) do
-    game = Game.remove_player(game, player_id)
+  def handle_call({:player_disconnected, player_id}, _from, game) do
+    game = Game.disconnect_player(game, player_id)
+    Process.send_after(self, :kick_check, 5000)
     {:reply, game, game, @timeout}
   end
 
@@ -98,21 +107,25 @@ defmodule PointingPoker.GameServer do
     game = Game.clear_votes(game)
     {:reply, game, game, @timeout}
   end
-  # def handle_call({:mark, phrase, player}, _from, game) do
-  #   new_game = Bingo.Game.mark(game, phrase, player)
 
-  #   :ets.insert(:games_table, {my_game_name(), new_game})
+  def handle_cast({:leave_game, player_id}, game) do
+    game = Game.remove_player(game, player_id)
+    {:noreply, game}
+  end
 
-  #   {:reply, summarize(new_game), new_game, @timeout}
-  # end
+  def handle_info(:kick_check, game) do
+    {earlier, _} = NaiveDateTime.add(NaiveDateTime.utc_now(), -4) |> NaiveDateTime.to_gregorian_seconds()
+    eligible_to_kick = Enum.filter(game.players, fn player -> player.disconnected_at < earlier end)
+    new_game = Enum.reduce(game.players, game, fn player, acc ->
+      if player.disconnected_at < earlier do
+        Game.remove_player(game, player.id)
+      else
+        acc
+      end
+    end)
 
-  # def summarize(game) do
-  #   %{
-  #     squares: game.squares,
-  #     scores: game.scores,
-  #     winner: game.winner
-  #   }
-  # end
+    {:noreply, new_game}
+  end
 
   def handle_info(:timeout, game) do
     {:stop, {:shutdown, :timeout}, game}

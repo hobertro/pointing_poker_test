@@ -74,4 +74,22 @@ defmodule PointingPokerGameTest do
     game = Game.player_voted(game, "b", 1)
     assert game.state == {:show_votes, 2.0}
   end
+
+  test "if a player disconnects, disconnected_at should be a timestamp" do
+    game = Game.new()
+    game = Game.add_player(game, "a", "bobby")
+    game = Game.disconnect_player(game, "a")
+    player = Game.find_player(game.players, "a")
+    refute player.disconnected_at == nil
+  end
+
+  test "if a player reconnects, timestamp should be cleared" do
+    game = Game.new()
+    game = Game.add_player(game, "a", "bobby")
+    game = Game.disconnect_player(game, "a")
+    player = Game.find_player(game.players, "a")
+    game = Game.reconnect_player(game, "a")
+    player = Game.find_player(game.players, "a")
+    assert player.disconnected_at == nil
+  end
 end
