@@ -29,30 +29,27 @@ defmodule PointPokeFrontWeb.GameLive do
      )}
   end
 
-  def handle_event("join_game", %{"player_name" => player_name}, socket) do
+  # def handle_event("join_game", %{"player_name" => ""} = params, socket) do
+  #   {:noreply, assign(socket, error: "")}
+  # end
+
+  def handle_event("join_game", %{"player_name" => player_name} = params, socket) do
     %{game_id: game_id, user_tag: user_tag} = socket.assigns
-    summary = GameServer.join_game(game_id, user_tag, player_name, false)
+    observer = Map.has_key?(params, "is_observer")
+    summary = GameServer.join_game(game_id, user_tag, player_name, observer)
     PointPokeFrontWeb.Endpoint.broadcast(game_id, "update", %{summary: summary})
     player = Game.find_player(summary.players, user_tag)
     {:noreply, assign(socket, summary: summary, player: player)}
   end
 
-  def handle_event("join_game", %{"player_name" => player_name, "is_observer" => _is_observer }, socket) do
-    %{game_id: game_id, user_tag: user_tag} = socket.assigns
-    summary = GameServer.join_game(game_id, user_tag, player_name, true)
-    PointPokeFrontWeb.Endpoint.broadcast(game_id, "update", %{summary: summary})
-    player = Game.find_player(summary.players, user_tag)
-    {:noreply, assign(socket, summary: summary, player: player)}
-  end
-
-  def handle_event("player_voted", %{"vote" => "?"} = socket) do
+  def handle_event("player_voted", %{"vote" => "?"} = params, socket) do
     %{game_id: game_id, user_tag: user_tag} = socket.assigns
     summary = GameServer.vote(game_id, user_tag, "?")
     PointPokeFrontWeb.Endpoint.broadcast(game_id, "update", %{summary: summary})
     {:noreply, assign(socket, summary: summary)}
   end
 
-  def handle_event("player_voted", %{"vote" => vote} = socket) do
+  def handle_event("player_voted", %{"vote" => vote} = params, socket) do
     %{game_id: game_id, user_tag: user_tag} = socket.assigns
     {vote, _} = Float.parse(vote)
     summary = GameServer.vote(game_id, user_tag, vote)
