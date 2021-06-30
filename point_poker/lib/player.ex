@@ -8,7 +8,7 @@ defmodule PointingPoker.Player do
   #  {:participant, {:voted, vote}} |
   #  {:participant, :abstain}
 
-  defstruct [:id, :name, :state, :disconnected_at]
+  defstruct [:id, :name, :state]
 
   def new(id, name, observer \\ false) do
     if observer do
